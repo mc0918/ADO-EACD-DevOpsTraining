@@ -1,0 +1,22 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+    {
+        "Sid": "TheseActionsSupportBucketLevelPermissions",
+        "Principal": "*", 
+		"Effect": "Allow",
+		"Action": "s3:ListBucket",
+		"Resource": "arn:aws:s3:::${app_name}-clientbucket-${env}"
+    }, 
+    {
+        "Sid": "TheseActionsSupportObjectrLevelPermissions",
+        "Principal": "*", 
+		"Effect": "Allow",
+		"Action": [
+			"s3:Get*",
+			"s3:PutObject",
+			"s3:ListMultipartUploadParts"
+		],
+		"Resource": "arn:aws:s3:::${app_name}-clientbucket-${env}/*"
+	}]
+}
