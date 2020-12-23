@@ -1,11 +1,11 @@
 window._config = {
     cognito: {
         userPoolId: "${userPoolId}",
-        userPoolClientId: "${userPoolClientId}"
+        userPoolClientId: "${userPoolClientId}",
         region: "${region}"
     },
     api: {
-        invokeUrl: "http://${invokeUrl}"
+        invokeUrl: "${invokeUrl}"
     }
 };
 

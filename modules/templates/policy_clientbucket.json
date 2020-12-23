@@ -6,7 +6,7 @@
         "Principal": "*", 
 		"Effect": "Allow",
 		"Action": "s3:ListBucket",
-		"Resource": "arn:aws:s3:::${app_name}-clientbucket-${env}"
+		"Resource": "arn:aws:s3:::wildrydes-mrc053"
     }, 
     {
         "Sid": "TheseActionsSupportObjectrLevelPermissions",
@@ -17,6 +17,6 @@
 			"s3:PutObject",
 			"s3:ListMultipartUploadParts"
 		],
-		"Resource": "arn:aws:s3:::${app_name}-clientbucket-${env}/*"
+		"Resource": "arn:aws:s3:::wildrydes-mrc053/*"
 	}]
 }

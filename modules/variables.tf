@@ -8,3 +8,6 @@ variable "env" {
 variable "region" {
 }
 
+variable "lambda_name" {
+    
+}
