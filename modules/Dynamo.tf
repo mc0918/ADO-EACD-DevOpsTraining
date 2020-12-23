@@ -7,4 +7,9 @@ resource "aws_dynamodb_table" "mrc-Rides2" {
       name = "RideId"
       type = "S"
     }
+
+    tags = {
+    "app_name" = var.app_name
+    "env"      = var.env
+  }
 }

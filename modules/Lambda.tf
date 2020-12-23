@@ -1,7 +1,7 @@
 data "archive_file" "lambda_zip" {                                                                                                                                                                                   
   type        = "zip"                                                                                                                                                                                                
   source_file  = "../modules/Files_lambda_S3/requestUnicorn.js"                                                                                                                                                                                         
-  output_path = "../modules/Files_lambda_S3/lambda_package.zip"                                                                                                                                                                         
+  output_path = "../modules/Files_lambda_S3/lambda_package.zip"                                                                                                                                                                      
 } 
 
 resource "aws_lambda_function" "mrc053_WildRydes_lambdafunc" {
@@ -17,4 +17,9 @@ resource "aws_lambda_function" "mrc053_WildRydes_lambdafunc" {
     aws_iam_role_policy_attachment.AWS_policy,
     aws_cloudwatch_log_group.mrc053_log_group,
   ]
+
+  tags = {
+    "app_name" = var.app_name
+    "env"      = var.env
+  }   
 }

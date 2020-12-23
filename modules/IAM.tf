@@ -31,6 +31,10 @@ resource "aws_iam_role" "mrc053_wildrydeslambda_role" {
   ]
 }
   EOF
+  tags = {
+    "app_name" = var.app_name
+    "env"      = var.env
+  }
 }
 
 resource "aws_iam_policy" "mrc053_wildrydeslambda_policy" {

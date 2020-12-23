@@ -1,7 +1,10 @@
 resource "aws_api_gateway_rest_api" "mrc053_api" {
     name = "mrc053_api"
     description = "terraform tutorial api gateway"
-
+    tags = {
+        "app_name" = var.app_name
+        "env"      = var.env
+      }
 }
 
 data "aws_cognito_user_pools" "mrc053_users" {

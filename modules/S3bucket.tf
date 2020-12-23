@@ -20,6 +20,10 @@ resource "aws_s3_bucket" "mrc053_wildrydes_site" {
     }]
     EOF
     }
+    tags = {
+    "app_name" = var.app_name
+    "env"      = var.env
+  }
 }
 
 resource "aws_s3_bucket_object" "html_object" {
