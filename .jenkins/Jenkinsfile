@@ -15,7 +15,7 @@ node {
         
         stage('Checkout') {
             sh "echo checking out scm...${BRANCH_TO_USE}"
-            git([url: 'https://github.com/NIT-Administrative-Systems/ADO-EACD-DevOpsTrainingMaster', branch: '${BRANCH_TO_USE}',  credentialsId:"GitHub-awsCloudOpsCJT" ])
+            git([url: 'https://github.com/mc0918/ADO-EACD-DevOpsTraining', branch: '${BRANCH_TO_USE}',  credentialsId:"GitHub-awsCloudOpsCJT" ])
             gitCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
             sh "echo Git Commit tag =  ${gitCommit}"
         }
