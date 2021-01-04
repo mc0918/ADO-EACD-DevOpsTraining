@@ -20,6 +20,11 @@ node {
             sh "echo Git Commit tag =  ${gitCommit}"
         }
 
+        parameters {
+            choice( choices: ['mrc'], description: 'Environment/Folder to build iac from', name: 'FOLDER')
+            string(name: 'region', defaultValue: 'us-east-2', description: 'AWS region to build the service in')
+        }
+
         stage('Get and Init') {
             withCredentials([[
                 $class: 'AmazonWebServicesCredentialsBinding',
