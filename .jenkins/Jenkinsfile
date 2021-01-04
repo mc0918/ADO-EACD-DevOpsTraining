@@ -32,7 +32,7 @@ node {
                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
             ]]) {
-                sh 'tfenv install'
+                sh 'tfenv install 0.14.3'
                 sh 'terraform -version'
                 sh 'ls -a'
                 sh 'AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} AWS_DEFAULT_REGION=${REGION} cd ${BUILD_ENV}; terraform get; terraform init'
