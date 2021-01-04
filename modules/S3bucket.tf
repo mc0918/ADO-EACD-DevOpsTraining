@@ -26,59 +26,60 @@ resource "aws_s3_bucket" "mrc053_wildrydes_site" {
   }
 }
 
-resource "aws_s3_bucket_object" "html_object" {
-  for_each = fileset("../clientSideFiles/", "*.html")
-  bucket = aws_s3_bucket.mrc053_wildrydes_site.id
-  key = each.value
-  source = "../clientSideFiles/${each.value}"
-  etag = filemd5("../clientSideFiles/${each.value}")
-  content_type = "text/html"
-}
+# DONE IN JENKINS
+# resource "aws_s3_bucket_object" "html_object" {
+#   for_each = fileset("../clientSideFiles/", "*.html")
+#   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
+#   key = each.value
+#   source = "../clientSideFiles/${each.value}"
+#   etag = filemd5("../clientSideFiles/${each.value}")
+#   content_type = "text/html"
+# }
 
-resource "aws_s3_bucket_object" "js_object" {
-  for_each = fileset("../clientSideFiles/", "**/*.js")
-  bucket = aws_s3_bucket.mrc053_wildrydes_site.id
-  key = each.value
-  source = "../clientSideFiles/${each.value}"
-  etag = filemd5("../clientSideFiles/${each.value}")
-  content_type = "application/javascript"
-}
+# resource "aws_s3_bucket_object" "js_object" {
+#   for_each = fileset("../clientSideFiles/", "**/*.js")
+#   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
+#   key = each.value
+#   source = "../clientSideFiles/${each.value}"
+#   etag = filemd5("../clientSideFiles/${each.value}")
+#   content_type = "application/javascript"
+# }
 
-resource "aws_s3_bucket_object" "css_object" {
-  for_each = fileset("../clientSideFiles/", "**/*.css")
-  bucket = aws_s3_bucket.mrc053_wildrydes_site.id
-  key = each.value
-  source = "../clientSideFiles/${each.value}"
-  etag = filemd5("../clientSideFiles/${each.value}")
-  content_type = "text/css"
-}
+# resource "aws_s3_bucket_object" "css_object" {
+#   for_each = fileset("../clientSideFiles/", "**/*.css")
+#   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
+#   key = each.value
+#   source = "../clientSideFiles/${each.value}"
+#   etag = filemd5("../clientSideFiles/${each.value}")
+#   content_type = "text/css"
+# }
 
-resource "aws_s3_bucket_object" "png_object" {
-  for_each = fileset("../clientSideFiles/", "**/*.png")
-  bucket = aws_s3_bucket.mrc053_wildrydes_site.id
-  key = each.value
-  source = "../clientSideFiles/${each.value}"
-  etag = filemd5("../clientSideFiles/${each.value}")
-  content_type = "image/png"
-}
+# resource "aws_s3_bucket_object" "png_object" {
+#   for_each = fileset("../clientSideFiles/", "**/*.png")
+#   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
+#   key = each.value
+#   source = "../clientSideFiles/${each.value}"
+#   etag = filemd5("../clientSideFiles/${each.value}")
+#   content_type = "image/png"
+# }
 
-resource "aws_s3_bucket_object" "jpg_object" {
-  for_each = fileset("../clientSideFiles/", "**/*.jpg")
-  bucket = aws_s3_bucket.mrc053_wildrydes_site.id
-  key = each.value
-  source = "../clientSideFiles/${each.value}"
-  etag = filemd5("../clientSideFiles/${each.value}")
-  content_type = "image/jpg"
-}
+# resource "aws_s3_bucket_object" "jpg_object" {
+#   for_each = fileset("../clientSideFiles/", "**/*.jpg")
+#   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
+#   key = each.value
+#   source = "../clientSideFiles/${each.value}"
+#   etag = filemd5("../clientSideFiles/${each.value}")
+#   content_type = "image/jpg"
+# }
 
-resource "aws_s3_bucket_object" "gif_object" {
-  for_each = fileset("../clientSideFiles/", "**/*.gif")
-  bucket = aws_s3_bucket.mrc053_wildrydes_site.id
-  key = each.value
-  source = "../clientSideFiles/${each.value}"
-  etag = filemd5("../clientSideFiles/${each.value}")
-  content_type = "image/gif"
-}
+# resource "aws_s3_bucket_object" "gif_object" {
+#   for_each = fileset("../clientSideFiles/", "**/*.gif")
+#   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
+#   key = each.value
+#   source = "../clientSideFiles/${each.value}"
+#   etag = filemd5("../clientSideFiles/${each.value}")
+#   content_type = "image/gif"
+# }
 
 resource "aws_s3_bucket_object" "config_object" {
   bucket = aws_s3_bucket.mrc053_wildrydes_site.id

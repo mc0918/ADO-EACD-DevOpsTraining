@@ -21,7 +21,7 @@ node {
         }
 
         parameters {
-            choice( choices: ['mrc'], description: 'Environment/Folder to build iac from', name: 'FOLDER')
+            choice( choices: ['mrc_dev'], description: 'Environment/Folder to build iac from', name: 'FOLDER')
             string(name: 'region', defaultValue: 'us-east-2', description: 'AWS region to build the service in')
         }
 
