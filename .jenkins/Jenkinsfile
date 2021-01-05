@@ -93,7 +93,7 @@ pipeline {
             notifyService("SUCCESS")
         }
         always {
-            echo {"BUILD FINISHED"}
+            echo "BUILD FINISHED"
         }
     }
 }
