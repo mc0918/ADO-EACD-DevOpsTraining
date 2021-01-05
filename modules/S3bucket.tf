@@ -1,3 +1,4 @@
+# Provisions s3 bucket to host static WildRydes site
 resource "aws_s3_bucket" "mrc053_wildrydes_site" {
     bucket = var.app_name
     acl = "public-read"
@@ -26,7 +27,7 @@ resource "aws_s3_bucket" "mrc053_wildrydes_site" {
   }
 }
 
-# DONE IN JENKINS
+# DONE IN JENKINS... Uncomment to have a website to test before using Jenkins
 # resource "aws_s3_bucket_object" "html_object" {
 #   for_each = fileset("../clientSideFiles/", "*.html")
 #   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
@@ -81,6 +82,7 @@ resource "aws_s3_bucket" "mrc053_wildrydes_site" {
 #   content_type = "image/gif"
 # }
 
+# config.js for WildRydes (see AWS tutorial)
 resource "aws_s3_bucket_object" "config_object" {
   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
   key    = "js/config.js"
@@ -100,6 +102,7 @@ output url {
   description = "static site url"
 }
 
+# Bucket access policy to allow users to access site
 resource "aws_s3_bucket_public_access_block" "access" {
   bucket = aws_s3_bucket.mrc053_wildrydes_site.id
   block_public_acls = true

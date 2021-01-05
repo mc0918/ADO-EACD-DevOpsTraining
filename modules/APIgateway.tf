@@ -1,3 +1,4 @@
+# API Gateway for WildRydes
 resource "aws_api_gateway_rest_api" "mrc053_api" {
     name = "mrc053_api"
     description = "terraform tutorial api gateway"
@@ -7,12 +8,14 @@ resource "aws_api_gateway_rest_api" "mrc053_api" {
       }
 }
 
+# Cognito User Pool with WildRydes users
 data "aws_cognito_user_pools" "mrc053_users" {
     depends_on = [aws_cognito_user_pool.mrc053_WildRydes_pool]
     name = aws_cognito_user_pool.mrc053_WildRydes_pool.name
 
 }
 
+# Authroizer for API Gateway, allows users access via Cognito
 resource "aws_api_gateway_authorizer" "mrc053_auth" {
     name = "mrc053_api"
     rest_api_id = aws_api_gateway_rest_api.mrc053_api.id
@@ -22,6 +25,7 @@ resource "aws_api_gateway_authorizer" "mrc053_auth" {
     provider_arns = data.aws_cognito_user_pools.mrc053_users.arns
 }
 
+# Creates ride resource (aka '/ride') in API Gateway
 resource "aws_api_gateway_resource" "ride" {
     rest_api_id = aws_api_gateway_rest_api.mrc053_api.id
     parent_id = aws_api_gateway_rest_api.mrc053_api.root_resource_id
@@ -29,6 +33,7 @@ resource "aws_api_gateway_resource" "ride" {
 
 }
 
+# POST method for /ride
 resource "aws_api_gateway_method" "api_method" {
   rest_api_id   = aws_api_gateway_rest_api.mrc053_api.id
   resource_id   = aws_api_gateway_resource.ride.id
@@ -41,6 +46,7 @@ resource "aws_api_gateway_method" "api_method" {
   }
 }
 
+# Integration that allows lambda to be invoked via POST to /ride
 resource "aws_api_gateway_integration" "integration" {
   rest_api_id             = aws_api_gateway_rest_api.mrc053_api.id
   resource_id             = aws_api_gateway_resource.ride.id
@@ -50,6 +56,7 @@ resource "aws_api_gateway_integration" "integration" {
   uri                     = aws_lambda_function.mrc053_WildRydes_lambdafunc.invoke_arn
 }
 
+# Deploys API to dev stage
 resource "aws_api_gateway_deployment" "deployment" {
     depends_on = [aws_api_gateway_integration.integration]
     rest_api_id = aws_api_gateway_rest_api.mrc053_api.id

@@ -1,3 +1,4 @@
+# DynamoDB table recording users' unicorn requests
 resource "aws_dynamodb_table" "mrc-Rides2" {
     name = "mrc-Rides2"
     hash_key       = "RideId"

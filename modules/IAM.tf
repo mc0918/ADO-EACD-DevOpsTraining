@@ -1,3 +1,4 @@
+# IAM role with lambda permissions
 resource "aws_iam_role" "mrc053_wildrydeslambda_role" {
     description = "terraform training role"
     assume_role_policy = <<EOF
@@ -37,6 +38,7 @@ resource "aws_iam_role" "mrc053_wildrydeslambda_role" {
   }
 }
 
+# IAM policy for lambda to write to DyanmoDB
 resource "aws_iam_policy" "mrc053_wildrydeslambda_policy" {
   description = "terraform training policy"
   policy = <<EOF
@@ -55,11 +57,13 @@ resource "aws_iam_policy" "mrc053_wildrydeslambda_policy" {
 EOF
 }
 
+# Basic IAM poolicy for lambda to produce logs
 resource "aws_iam_role_policy_attachment" "AWS_policy" {
   policy_arn = aws_iam_policy.mrc053_wildrydeslambda_policy.arn
   role       = aws_iam_role.mrc053_wildrydeslambda_role.name
 }
 
+# Inline IAM policy allowing lambda to write to DynamoDB... not sure which one works
 resource "aws_iam_role_policy" "inline_policy" {
   name = "DynamoDBWriteAccess"
   role = aws_iam_role.mrc053_wildrydeslambda_role.id

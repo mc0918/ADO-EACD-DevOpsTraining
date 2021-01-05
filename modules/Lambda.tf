@@ -4,6 +4,7 @@ data "archive_file" "lambda_zip" {
   output_path = "../modules/Files_lambda_S3/lambda_package.zip"                                                                                                                                                                      
 } 
 
+# requestUnicorn.js is the lambda function
 resource "aws_lambda_function" "mrc053_WildRydes_lambdafunc" {
   filename      = data.archive_file.lambda_zip.output_path
   function_name = var.lambda_name
