@@ -71,6 +71,10 @@ resource "aws_api_gateway_integration_response" "integration_response" {
   http_method = aws_api_gateway_method.api_method.http_method
   status_code = "200"
 
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+
   depends_on = [
     aws_api_gateway_integration.integration
   ]
@@ -80,6 +84,13 @@ resource "aws_api_gateway_method_response" "method_response" {
   resource_id   = aws_api_gateway_resource.ride.id
   http_method   = aws_api_gateway_method.api_method.http_method
   status_code   = "200"
+
+  response_parameters = {
+        "method.response.header.Access-Control-Allow-Origin" = true,
+        "method.response.header.Access-Control-Expose-Headers" = true,
+        "method.response.header.Content-Disposition" = true,
+        "method.response.header.Content-Type" = true
+  }
 } 
 
 # CORS support for mock integration
@@ -105,6 +116,12 @@ resource "aws_api_gateway_method_response" "method_response_cors" {
     "application/json" = "Empty"
   }
 
+  response_parameters = {
+        "method.response.header.Access-Control-Allow-Headers" = true,
+        "method.response.header.Access-Control-Allow-Methods" = true,
+        "method.response.header.Access-Control-Allow-Origin" = true
+    }
+
   depends_on = [
     aws_api_gateway_method.options_method_cors
   ]
@@ -114,6 +131,12 @@ resource "aws_api_gateway_integration_response" "integration_response_cors" {
   resource_id   = aws_api_gateway_resource.ride.id
   http_method   = aws_api_gateway_method.options_method_cors.http_method
   status_code   = "200"
+
+  response_parameters = {
+  #       "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+  #       "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'",
+        "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    }
 
   depends_on = [
     aws_api_gateway_integration.integration_cors
@@ -130,7 +153,11 @@ resource "aws_lambda_permission" "mrc_api_lambda_permission" {
   # The /*/*/* part allows invocation from any stage, method and resource path
   # within API Gateway REST API.
   source_arn = ""
-   
+
+  depends_on = [
+    aws_api_gateway_rest_api.mrc053_api,
+    aws_api_gateway_resource.ride
+  ] 
 } 
 
 # Deploys API to dev stage

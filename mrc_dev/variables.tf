@@ -24,7 +24,7 @@ default     = "us-east-2"
 }
 
 variable "lambda_name" {
-  default = "mrc053_WildRydes_lambdafunc"
+  default = "requestUnicorn"
 }
 
 
