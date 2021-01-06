@@ -120,7 +120,7 @@ resource "aws_api_gateway_integration_response" "integration_response_cors" {
 resource "aws_lambda_permission" "mrc_api_lambda_permission" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.mrc053_WildRydes_lambdafunc.name
+  function_name = aws_lambda_function.mrc053_WildRydes_lambdafunc.function_name
   principal     = "apigateway.amazonaws.com"
 
   # The /*/*/* part allows invocation from any stage, method and resource path
