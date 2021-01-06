@@ -91,7 +91,7 @@ resource "aws_api_gateway_integration" "integration_cors" {
   EOF
   }
 }
-resource "aws_api_gateway_method_response" "method_response_cors" {
+resource "aws_api_gateway_method_response_cors" "method_response_cors" {
   rest_api_id   = aws_api_gateway_rest_api.mrc053_api.id
   resource_id   = aws_api_gateway_resource.ride.id
   http_method   = aws_api_gateway_method.options_method_cors.http_method
@@ -105,7 +105,7 @@ resource "aws_api_gateway_method_response" "method_response_cors" {
     aws_api_gateway_method.options_method_cors
   ]
 }
-resource "aws_api_gateway_integration_response" "integration_response_cors" {
+resource "aws_api_gateway_integration_response_cors" "integration_response_cors" {
   rest_api_id   = aws_api_gateway_rest_api.mrc053_api.id
   resource_id   = aws_api_gateway_resource.ride.id
   http_method   = aws_api_gateway_method.options_method_cors.http_method
